@@ -80,34 +80,21 @@ class RGA (ID: Int){
     * @return
     */
   def addRight(vertex: Vertex,newVertex: Vertex): Boolean ={
-    //println("\n")
     var string = this.tostring2()
-    //println(s"$ID, pre state, $string")
-    //println(s"$ID, addRight,  "+newVertex.toString)
     if(lookup(vertex) && !lookup(newVertex)){
-      //println(s"$ID, getting vertex with key ${vertex.key}")
       var l = VA.get(vertex.key).get
-      //println(s"$ID, successor of l ${successor(l).key}")
       var r = VA.get(successor(l).key).get
 
-      //println(s"$ID,pre, [l : ${l.toString}] [new : ${newVertex.toString}] [r : ${r.toString}] ")
 
       while (r!=Bottom && r < newVertex) {
         l = r
         r = successor(l)
-        //println(s"$ID,in, l : ${l.toString}  r : ${r.toString}")
       }
-      //println(s"$ID, post, to initialization [L.next =  ${l.next} ] [ newvertex  =$newVertex ]  [R = $r ]")
       l.next = newVertex
-      //println(s"$ID, post, initialization step 1 [L.next =  ${l.next} ] [ newvertex  =$newVertex ]  [R = $r ]")
       newVertex.next=r
-      //println(s"$ID, post, initialization End [L.next =  ${l.next} ] [ newvertex  =$newVertex ]  [R = $r ] ")
-
-      //println(s"$ID,post, [l : ${l.toString}] [new : ${newVertex.toString}] [r : ${r.toString}]")
 
       VA +=(newVertex.key -> newVertex)
       var string = this.tostring2()
-      //println(s"$ID, post state, $string")
 
       return true
     }else return false
@@ -143,12 +130,9 @@ class RGA (ID: Int){
     var c = EChain
     while (c!=Bottom) {
       if(c.atom != null){
-        ////println("string construct "+c.atom.toString)
         tmp+=" "+c.atom.toString
       }
-      //println(ID+", in key "+c.key)
       c = c.next
-      //println(ID+", gone to key "+c.key)
     }
     return tmp
   }
